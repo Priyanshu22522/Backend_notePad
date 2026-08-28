@@ -1,0 +1,1 @@
+React.js is a JavaScript library used to build interactive and dynamic user interfaces. It uses a component-based architecture, where the UI is divided into reusable components. React uses JSX, props, state, and hooks to manage and display data. It is mainly used for developing the frontend of web applications.

@@ -1,0 +1,16 @@
+Node.js is an open-source, cross-platform JavaScript runtime environment that allows developers 
+
+to run JavaScript outside the browser. It is mainly used for backend and server-side 
+
+development. Node.js is built on Google's V8 JavaScript engine and follows an event-driven, non-blocking 
+
+architecture, which makes it efficient for handling multiple requests at the same time.
+
+Main Points
+Node.js is a runtime environment, not a programming language.
+It allows JavaScript to run outside the browser.
+It is mainly used for backend development.
+It is built on the Chrome V8 JavaScript engine.
+Node.js uses an event-driven architecture.
+It supports asynchronous and non-blocking operations.
+It can be used to create web servers and REST APIs.

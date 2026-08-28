@@ -1,0 +1,5 @@
+I am a B.Tech IT graduate with a strong interest in Full Stack Web Development. My strongest area is frontend development, where I have hands-on knowledge of HTML, CSS, JavaScript, React.js, Bootstrap, and Tailwind CSS. I enjoy designing responsive, interactive, and user-friendly web interfaces using reusable React components.
+
+Along with frontend development, I have a good basic understanding of backend development using Node.js, Express.js, and MongoDB. I understand concepts such as REST APIs, routing, form handling, CRUD operations, and database connectivity. I am continuously improving my backend knowledge so that I can become a better MERN Stack Developer.
+
+My main focus is currently on improving my React and JavaScript skills, while gradually strengthening my backend concepts and building real-world projects.

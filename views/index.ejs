@@ -3,36 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TaskVault</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="main w-full min-h-screen bg-zinc-900">
-    <div class="form p-10 text-white">
-        <form action="/create" method="post">
-        <input class="block w-full rounded-md px-3 py-2 outline-none bg-zinc-800" type="text" placeholder="Title goes here.... " name='title' ></input>
-        <textarea class="block w-full rounded-md outline-none px-3 mt-2 py-2 resize-none bg-zinc-800" placeholder="Write your task details here..." name=details></textarea>
-        <input class="mt-2 bg-blue-600 px-5 py-2 rounded-md" type="submit" value="Create task"></input>
-        </form>
+<body class="paper min-h-screen text-[#1c1c1a]">
+
+    <div class="max-w-5xl mx-auto px-6 py-12">
+
+        <!-- Header -->
+        <header class="flex items-center gap-4 mb-14">
+            <div class="stamp w-14 h-14 shrink-0 bg-[#1c1c1a] border-2 border-[#1c1c1a] flex items-center justify-center">
+                <span class="text-[#efe7d8] font-mono-note font-bold text-lg">TV</span>
+            </div>
+            <div>
+                <h1 class="squiggle inline-block text-3xl font-bold tracking-tight">TaskVault</h1>
+                <p class="text-sm text-[#5a5348] font-mono-note mt-2">// a pile of little text files</p>
+            </div>
+        </header>
+
+        <!-- Create form -->
+        <section class="bg-[#fffdf7] border-2 border-[#1c1c1a] hard-shadow-static p-6 mb-16 relative">
+            <span class="absolute -top-3 -left-3 bg-[#c8553d] text-[#fffdf7] text-xs font-mono-note font-bold px-2 py-1 border-2 border-[#1c1c1a] rotate-[-4deg]">NEW</span>
+            <h2 class="font-mono-note text-xs uppercase tracking-widest text-[#5a5348] mb-4">add to the pile</h2>
+            <form action="/create" method="post" class="space-y-3">
+                <input
+                    class="ink-focus block w-full px-4 py-2.5 bg-[#efe7d8] border-2 border-[#1c1c1a] outline-none text-[#1c1c1a] font-medium placeholder-[#8a8378]"
+                    type="text" placeholder="Title goes here..." name="title" required>
+
+                <textarea
+                    class="ink-focus block w-full px-4 py-2.5 bg-[#efe7d8] border-2 border-[#1c1c1a] outline-none text-[#1c1c1a] resize-none h-28 font-mono-note text-sm"
+                    placeholder="Write your task details here..." name="details" required></textarea>
+
+                <button
+                    class="hard-shadow inline-flex items-center gap-2 bg-[#c8553d] text-[#fffdf7] border-2 border-[#1c1c1a] px-5 py-2.5 font-bold"
+                    type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Create task
+                </button>
+            </form>
+        </section>
+
+        <!-- Task list -->
+        <section>
+            <h2 class="font-mono-note text-xs uppercase tracking-widest text-[#5a5348] mb-6">
+                the pile <% if(files.length>0){ %>— <%= files.length %> item<%= files.length===1 ? '' : 's' %><% } %>
+            </h2>
+
+            <% if(files.length>0){ %>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-3">
+                    <% var rotations = ['rotate-a','rotate-b','rotate-c']; %>
+                    <% files.forEach(function(val, i){ %>
+                        <div class="fade-in hard-shadow <%= rotations[i % 3] %> bg-[#fffdf7] border-2 border-[#1c1c1a] p-5 relative flex flex-col justify-between">
+                            <div class="tape"></div>
+
+                            <div class="mb-5">
+                                <span class="font-mono-note text-[10px] uppercase tracking-widest text-[#8a8378]">note_<%= String(i+1).padStart(2,'0') %>.txt</span>
+                                <h3 class="font-mono-note font-bold text-lg leading-snug break-all mt-1"><%= val.replace(/\.txt$/, '') %></h3>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-3 border-t-2 border-dashed border-[#1c1c1a]/20 text-sm">
+                                <a class="ink-link font-bold" href="/file/<%= val %>">Read more</a>
+                                <a class="text-[#5a5348] hover:text-[#c8553d] transition flex items-center gap-1 font-mono-note text-xs" href="/edit/<%= val %>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                    rename
+                                </a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <div class="border-2 border-dashed border-[#1c1c1a]/40 py-16 flex flex-col items-center text-center">
+                    <span class="font-mono-note text-5xl mb-3 rotate-[-4deg] inline-block">¯\_(ツ)_/¯</span>
+                    <p class="text-[#5a5348] font-mono-note text-sm">nothing pinned yet — add your first note above.</p>
+                </div>
+            <% } %>
+        </section>
 
     </div>
-    <div class="tasks flex gap-3 flex-wrap p-10 ">
-
-        <% if(files.length>0){ %>
-            <% files.forEach(function(val){ %>
-             <div class="task w-72 px-3 py-4 bg-zinc-800 rounded-md">
-            <h1 class="text-white text-3xl tracking-tighter"><%=val%></h1>
-            <a class="text-blue-500 inline-block mt-3" href="/file/<%= val%>">Read More</a>
-        </div>
-           <% }) %>
-
-           <% }else { %>
-               <h3 class="text-zinc-600">no tasks yet.</h3>
-       <% } %>
-
-    </div>
-     </div>
-    
 </body>
 </html>
